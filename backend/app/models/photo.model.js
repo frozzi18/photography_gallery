@@ -7,7 +7,7 @@ const Photo = function (photo) {
   this.story = photo.story;
 };
 
-Photo.create = (newPhoto, result) => {
+Photo.upload = (newPhoto, result) => {
   sql.query("INSERT INTO photo_collection SET ?", newPhoto, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -20,4 +20,40 @@ Photo.create = (newPhoto, result) => {
   });
 };
 
+// Get All Photos
+Photo.getAll = (result) => {
+  sql.query("SELECT * FROM photo_collection", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("photos: ", res);
+    result(null, res);
+  });
+};
+
+// Get Photo by ID
+Photo.findById = (photoId, result) => {
+  sql.query(
+    `SELECT * FROM photo_collection WHERE id_photo = ${photoId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        console.log("found photo: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
+
+      // not found Customer with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
 module.exports = Photo;
