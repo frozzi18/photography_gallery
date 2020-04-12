@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/navbar";
 import Gallery from "./components/gallery/gallery";
+import Footer from "./components/footer/footer";
 
 // import AddPhoto from "./components/add-photo.component";
 // import Photo from "./components/photo.component";
@@ -14,6 +15,7 @@ function App() {
     <div>
       <Navbar />
       <Gallery />
+      <Footer />
     </div>
   );
 }

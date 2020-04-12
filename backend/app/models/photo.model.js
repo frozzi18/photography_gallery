@@ -1,4 +1,6 @@
 const sql = require("./db");
+const fs = require("fs");
+var path = require("path");
 
 // constructor
 const Photo = function (photo) {
@@ -35,7 +37,7 @@ Photo.getAll = (result) => {
 };
 
 // Get Photo by ID
-Photo.findById = (photoId, result) => {
+Photo.findById = (photoId, result) =>
   sql.query(
     `SELECT * FROM photo_collection WHERE id_photo = ${photoId}`,
     (err, res) => {
@@ -55,5 +57,93 @@ Photo.findById = (photoId, result) => {
       result({ kind: "not_found" }, null);
     }
   );
+
+// Edit Photo
+Photo.updateById = (photoId, photo, result) => {
+  sql.query(
+    "UPDATE photo_collection SET story = ?, title_photo = ?, photo_path = ? WHERE id_photo = ?",
+    [photo.story, photo.title_photo, photo.photo_path, photoId],
+    (err, res) => {
+      if (err) {
+        console.log("error : ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        result({ kind: "not found" }, null);
+        return;
+      }
+      console.log("updated photo: ", { photoId: photoId, ...photo });
+      result(null, { photoId: photoId, ...photo });
+    }
+  );
 };
+
+// Remove photo
+Photo.remove = (photoId, result) =>
+  sql.query(
+    `SELECT * FROM photo_collection WHERE id_photo = ${photoId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        fs.unlink(res[0].photo_path, (err) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+        });
+
+        sql.query(
+          "DELETE FROM photo_collection WHERE id_photo = ?",
+          photoId,
+          (err, res, next) => {
+            if (err) {
+              console.log("error : ", err);
+              result(null, err);
+              return;
+            }
+
+            if (res.affectedRows == 0) {
+              result({ kind: "not found" }, null);
+              return;
+            }
+            console.log("deleted photo with id: ", photoId);
+            result(null, res);
+          }
+        );
+      }
+    }
+  );
+
+// Delete all photos from the database
+Photo.removeAll = (result) => {
+  sql.query("DELETE FROM photo_collection", (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    const photo_directory = appRoot + "/uploads";
+    fs.readdir(photo_directory, (err, files) => {
+      if (err) throw err;
+
+      for (const file of files) {
+        fs.unlink(path.join(photo_directory, file), (err) => {
+          if (err) throw err;
+        });
+      }
+    });
+
+    console.log(`deleted ${res.affectedRows} photos`);
+    result(null, res);
+  });
+};
+
 module.exports = Photo;

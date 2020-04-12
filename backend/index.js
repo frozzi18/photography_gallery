@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+var path = require("path");
 
 require("dotenv").config();
+global.appRoot = path.resolve(__dirname);
 
 const app = express();
 
@@ -21,5 +23,5 @@ app.get("/", (req, res) => {
 require("./app/routes/photo.routes")(app);
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is running on port 5000");
 });
