@@ -2,11 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 var path = require("path");
+var cors = require("cors");
 
 require("dotenv").config();
 global.appRoot = path.resolve(__dirname);
 
 const app = express();
+
+app.use(cors());
 
 // Use body parser for incoming data
 app.use(bodyParser.json());
