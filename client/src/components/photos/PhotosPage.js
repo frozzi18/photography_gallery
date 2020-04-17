@@ -9,8 +9,8 @@ const PhotosPage = () => {
   const photos = useSelector((state) => state.photos);
   console.log(photos);
   return (
-    <div className="col-md-12 mt-4">
-      <div className="col-md-10">
+    <div className="col-md-12 mt-6">
+      <div className="col-md-7">
         <h1>Photo</h1>
         <PhotoPage photos={photos} />
       </div>
