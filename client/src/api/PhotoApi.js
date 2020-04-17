@@ -4,23 +4,18 @@ import axios from "axios";
 export default function PhotoApi() {
   let [photos, setPhotos] = useState([]);
 
-  // async function fetchData() {
-  //   const res = await fetch("http://localhost:5000/photos");
-  //   res
-  //     .json()
-  //     .then((res) => setPhotos(res))
-  //     .catch((err) => {
-  //       return err;
-  //     });
-  // }
-
   useEffect(() => {
-    // fetchData();
-
+    // Fetch data from API
     const fetchData = async () => {
-      const result = await axios("http://localhost:5000/photos");
-
-      setPhotos(result.data);
+      const result = await fetch("http://localhost:5000/photos")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setPhotos(data);
+        })
+        .catch((error) => {
+          return error;
+        });
     };
 
     fetchData();

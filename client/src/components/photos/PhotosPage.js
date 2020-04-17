@@ -1,7 +1,9 @@
-import React, { PropTypes, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as photoActions from "../../actions/photoActions";
 import { useSelector, useDispatch } from "react-redux";
+import PhotoPage from "./PhotoPage";
+import PropTypes from "prop-types";
 
 const PhotosPage = () => {
   const photos = useSelector((state) => state.photos);
@@ -10,24 +12,14 @@ const PhotosPage = () => {
     <div className="col-md-12 mt-4">
       <div className="col-md-8">
         <h1>Photo</h1>
-        <ul className="list-group">
-          {photos.map((photo) => (
-            <li key={photo.id_photo} className="list-group-item">
-              {photo.photo_path}
-            </li>
-          ))}
-        </ul>
+        <PhotoPage photos={photos} />
       </div>
     </div>
   );
 };
 
-// PhotosPage.prototype = {
-//   photos: PropTypes.array.isRequired,
-// };
-
-function mapStateToProps(state, ownProps) {
-  return { photos: state.photos };
-}
+PhotosPage.prototype = {
+  photos: PropTypes.object.isRequired,
+};
 
 export default PhotosPage;

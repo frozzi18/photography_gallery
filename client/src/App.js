@@ -8,11 +8,11 @@ import PhotoApi from "./api/PhotoApi";
 
 function App() {
   return (
-    <div className="bg-primary">
+    <div>
       <Header />
       <Form />
       <RoutesMain />
-      {/* <PhotoApi /> */}
+      <PhotoApi />
     </div>
   );
 }
