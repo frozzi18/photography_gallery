@@ -10,11 +10,7 @@ const PhotosPage = () => {
   console.log(photos);
   return (
     <div className="col-md-12 mt-4">
-<<<<<<< HEAD
-      <div className="col-md-4">
-=======
-      <div className="col-md-8">
->>>>>>> b9fe0c7b5b6af353c298676ad11b312627918cd0
+      <div className="col-md-10">
         <h1>Photo</h1>
         <PhotoPage photos={photos} />
       </div>
