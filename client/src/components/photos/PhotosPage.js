@@ -10,7 +10,7 @@ const PhotosPage = () => {
   console.log(photos);
   return (
     <div className="col-md-12 mt-4">
-      <div className="col-md-8">
+      <div className="col-md-4">
         <h1>Photo</h1>
         <PhotoPage photos={photos} />
       </div>
