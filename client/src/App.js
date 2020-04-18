@@ -4,7 +4,7 @@ import Header from "./components/common/Header";
 
 import Form from "./components/common/Form";
 
-import PhotoApi from "./api/PhotoApi";
+// import PhotoApi from "./api/PhotoApi";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Form />
       <RoutesMain />
-      <PhotoApi />
+      {/* <PhotoApi /> */}
     </div>
   );
 }

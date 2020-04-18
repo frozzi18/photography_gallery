@@ -13,7 +13,7 @@ export default function Header() {
             <Link to="/photos" className="navbar-item nav-link">
               Photos
             </Link>
-            <Link to="/" className="navbar-item nav-link">
+            <Link to="/photo" className="navbar-item nav-link">
               Photo
             </Link>
           </div>

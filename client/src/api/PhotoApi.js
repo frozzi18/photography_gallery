@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 export default function PhotoApi() {
   let [photos, setPhotos] = useState([]);
@@ -7,7 +7,7 @@ export default function PhotoApi() {
   useEffect(() => {
     // Fetch data from API
     const fetchData = async () => {
-      const result = await fetch("http://localhost:5000/photos")
+      await fetch("http://localhost:5000/photos")
         .then((response) => response.json())
         .then((data) => {
           console.log(data);

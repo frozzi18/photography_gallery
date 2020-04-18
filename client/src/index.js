@@ -12,7 +12,6 @@ import { loadPhotos } from "./actions/photoActions";
 const store = configureStore();
 
 store.dispatch(loadPhotos());
-console.log("Hello");
 
 ReactDOM.render(
   <Provider store={store}>
