@@ -8,10 +8,12 @@ import { BrowserRouter } from "react-router-dom";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 import { loadPhotos } from "./actions/photoActions";
+import { loadPhotos2 } from "./actions/photo2Action";
 
 const store = configureStore();
 
 store.dispatch(loadPhotos());
+store.dispatch(loadPhotos2());
 
 ReactDOM.render(
   <Provider store={store}>
