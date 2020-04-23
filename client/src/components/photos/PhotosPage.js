@@ -16,7 +16,7 @@ const PhotosPage = (props) => {
       <div className="row">
         <div className="col-md-4">
           <h1>Photo</h1>
-          <PhotoList photos={photos} />
+          <PhotoList photos={photos} path={props.match.path} />
         </div>
         <div className="col-md-8">
           <h1>Photo Detail</h1>
